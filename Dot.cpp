@@ -28,7 +28,7 @@ void Dot::render(sf::RenderTarget& target)
 void Dot::calculateFitness()
 {
 	if(m_finished)
-		m_fitness = 0.1f + 10000.f / (m_brain.step * m_brain.step);
+		m_fitness = 0.01f + 10000.f / (m_brain.step * m_brain.step);
 	else
 	{
 		auto distVec = m_shape.getPosition() - Dot::target.getPosition();
@@ -46,6 +46,22 @@ void Dot::reset()
 	m_brain.step = 0;
 
 	m_shape.setPosition(Dot::startingPos);
+}
+
+void Dot::inheritMoveset(const Dot& parent1, const Dot& parent2)
+{
+	float firstParentChance;
+	float fitSum = parent1.m_fitness + parent2.m_fitness;
+
+	if (fitSum)
+		firstParentChance = parent1.m_fitness / fitSum;
+	else
+		firstParentChance = 1;
+
+	float randomValue = static_cast<float>(std::rand()) / RAND_MAX;
+
+	for (size_t i = 0; i < BRAIN_SIZE; i++)
+		m_brain.directions[i] = randomValue < firstParentChance ? parent1.m_brain.directions[i] : parent2.m_brain.directions[i];
 }
 
 void Dot::move()

@@ -4,8 +4,6 @@
 #include"Dot.h"
 #include"Obstacle.h"
 
-//size_t constexpr MAX_STEPS = 1000;
-
 class Population
 {
 public:

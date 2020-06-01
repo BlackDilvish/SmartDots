@@ -19,6 +19,7 @@ public:
 	void mutate() { m_brain.mutate(); }
 	void calculateFitness();
 	void reset();
+	void inheritMoveset(const Dot& parent1, const Dot& parent2);
 
 	static Target& getTarget() { return Dot::target; }
 	size_t getStep() const { return m_brain.step; }

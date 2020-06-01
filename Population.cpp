@@ -47,13 +47,14 @@ void Population::makeSelection()
 
 	if(bestDot.getFitness() > 0.1)
 		m_bestStep = bestDot.getStep();
-	bestDot.reset();
 
 	for (size_t i=1; i<m_population.size(); i++)
 	{
-		m_population[i] = bestDot;
+		m_population[i].inheritMoveset(bestDot, m_population[1]);
+		m_population[i].reset();
 		m_population[i].mutate();
 	}
+	bestDot.reset();
 	bestDot.setColor(sf::Color::Green);
 
 	m_txtGenInfo.setString("Generation: " + std::to_string(++m_generation));

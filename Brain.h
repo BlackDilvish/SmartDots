@@ -3,7 +3,7 @@
 #include<vector>
 #include<SFML/Graphics.hpp>
 
-inline float randFloat() { return ((float)std::rand() / (RAND_MAX)) * 2 - 1; }
+inline float randFloat() { return (static_cast<float>(std::rand()) / (RAND_MAX)) * 2 - 1; }
 
 struct Brain
 {
