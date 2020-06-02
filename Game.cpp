@@ -13,8 +13,10 @@ Game::Game(const std::pair<size_t, size_t>& windowSize)
 void Game::update()
 {
 	pollevents();
+	handleClick();
 
-	m_testPopulation->update(m_window->getSize(), m_obstacles);
+	if(!m_editing)
+		m_testPopulation->update(m_window->getSize(), m_obstacles);
 }
 
 void Game::render()
@@ -25,7 +27,6 @@ void Game::render()
 		obstacle.render(*m_window);
 
 	m_testPopulation->render(*m_window);
-
 	Dot::getTarget().render(*m_window);
 
 	m_window->display();
@@ -51,4 +52,47 @@ void Game::pollevents()
 	while (m_window->pollEvent(event))
 		if (event.type == sf::Event::Closed)
 			m_window->close();
+}
+
+void Game::handleClick()
+{
+	float dt = m_clock.restart().asSeconds();
+
+	if (m_clickTimer < m_clickCooldown)
+		m_clickTimer += dt;
+
+	if (validClick() && !m_editing)
+	{
+		placeObstacle();
+		m_clickTimer = 0;
+	}
+
+	if (m_editing)
+		moveObstacle();
+}
+
+void Game::placeObstacle()
+{
+	auto firstPos = sf::Mouse::getPosition(*m_window);
+	Obstacle obstacle(sf::Vector2f(100.f, 20.f), sf::Vector2f(firstPos));
+
+	m_obstacles.push_back(obstacle);
+	m_editing = true;
+}
+
+void Game::moveObstacle()
+{
+	auto newSize = sf::Vector2f(sf::Mouse::getPosition(*m_window)) - m_obstacles[m_obstacles.size() - 1].getPosition();
+	m_obstacles[m_obstacles.size() - 1].setSize(newSize);
+
+	if (validClick())
+	{
+		m_editing = false;
+		m_clickTimer = 0;
+	}
+}
+
+bool Game::validClick() const
+{
+	return sf::Mouse::isButtonPressed(sf::Mouse::Left) && (m_clickTimer >= m_clickCooldown);
 }
