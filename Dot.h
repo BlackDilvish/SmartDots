@@ -24,6 +24,7 @@ public:
 	static Target& getTarget() { return Dot::target; }
 	size_t getStep() const { return m_brain.step; }
 	float getFitness() const { return m_fitness; }
+	float& getProbability() { return m_probability; }
 	bool active() const { return m_isAlive && !m_finished; }
 	bool finished() const { return m_finished; }
 
@@ -40,6 +41,7 @@ private:
 	bool m_isAlive = true;
 	bool m_finished = false;
 	float m_fitness = 0;
+	float m_probability = 0;
 	
 	sf::CircleShape m_shape;
 	Brain m_brain{ BRAIN_SIZE };

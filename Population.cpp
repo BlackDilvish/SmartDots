@@ -48,11 +48,20 @@ void Population::makeSelection()
 	if(bestDot.finished())
 		m_bestStep = bestDot.getStep();
 
+
+	float sum = 0;
+	for (const auto& p : m_population)
+		sum += p.getFitness();
+
+	for (auto& p : m_population)
+		p.getProbability() = p.getFitness() / sum;
+
+
 	auto newPopulation = m_population;
 
 	for (size_t i=1; i<m_population.size(); i++)
 	{
-		auto parent = m_population[poolSelection()];
+		auto parent = m_population[improvedPoolSelection()];
 		newPopulation[i].inherit(parent);
 
 		newPopulation[i].reset();
@@ -81,4 +90,18 @@ int Population::poolSelection()
 	}
 
 	return 0;
+}
+
+int Population::improvedPoolSelection()
+{
+	int index = 0;
+	float r = randNum(0, 1);
+
+	while (r > 0)
+	{
+		r -= m_population[index].getProbability();
+		index++;
+	}
+
+	return --index;
 }

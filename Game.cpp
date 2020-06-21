@@ -2,7 +2,7 @@
 
 Game::Game(const std::pair<size_t, size_t>& windowSize)
 {
-	std::srand(std::time(nullptr));
+	std::srand(static_cast<size_t>(std::time(nullptr)));
 
 	initWindow(windowSize);
 }

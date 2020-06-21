@@ -14,7 +14,9 @@ public:
 
 private:
 	void makeSelection();
+
 	int poolSelection();
+	int improvedPoolSelection();
 
 	size_t m_generation = 1;
 	size_t m_bestStep = BRAIN_SIZE;
