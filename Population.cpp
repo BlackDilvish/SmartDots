@@ -45,17 +45,40 @@ void Population::makeSelection()
 	Dot& bestDot = m_population[0];
 	std::cout << bestDot.getFitness() << " " << bestDot.getStep() << std::endl;
 
-	if(bestDot.getFitness() > 0.1)
+	if(bestDot.finished())
 		m_bestStep = bestDot.getStep();
+
+	auto newPopulation = m_population;
 
 	for (size_t i=1; i<m_population.size(); i++)
 	{
-		m_population[i].inheritMoveset(bestDot, m_population[1]);
-		m_population[i].reset();
-		m_population[i].mutate();
+		auto parent = m_population[poolSelection()];
+		newPopulation[i].inherit(parent);
+
+		newPopulation[i].reset();
+		newPopulation[i].mutate();
 	}
-	bestDot.reset();
-	bestDot.setColor(sf::Color::Green);
+	
+	m_population = newPopulation;
+
+	m_population[0].reset();
+	m_population[0].setColor(sf::Color::Green);
+
 
 	m_txtGenInfo.setString("Generation: " + std::to_string(++m_generation));
+}
+
+int Population::poolSelection()
+{
+	for (int i = 0; i < 1000; i++)
+	{
+		int r1 = static_cast<int>(randNum(0, m_population.size() - 1));
+		int r2 = static_cast<int>(randNum(0, m_population[0].getFitness()));
+
+		bool p = m_population[r1].getFitness() > r2;
+		if (m_population[r1].getFitness() > r2)
+			return r1;
+	}
+
+	return 0;
 }

@@ -3,7 +3,8 @@
 #include<vector>
 #include<SFML/Graphics.hpp>
 
-inline float randFloat() { return (static_cast<float>(std::rand()) / (RAND_MAX)) * 2 - 1; }
+template<typename T, typename U>
+inline auto randNum(T a, U b) { return (static_cast<float>(std::rand()) / (RAND_MAX)) * (b-a) + a; }
 
 struct Brain
 {

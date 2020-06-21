@@ -5,9 +5,6 @@ Game::Game(const std::pair<size_t, size_t>& windowSize)
 	std::srand(std::time(nullptr));
 
 	initWindow(windowSize);
-
-	m_obstacles.push_back(Obstacle({ 200.f, 50.f }, { 400.f, 300.f }));
-	m_obstacles.push_back(Obstacle({ 100.f, 20.f }, { 400.f, 100.f }));
 }
 
 void Game::update()
