@@ -7,10 +7,10 @@
 
 size_t constexpr POPULATION_SIZE = 1000;
 
-class Game
+class App
 {
 public:
-	Game(const std::pair<size_t, size_t>& windowSize);
+	App(const std::pair<size_t, size_t>& windowSize);
 
 	void update();
 	void render();

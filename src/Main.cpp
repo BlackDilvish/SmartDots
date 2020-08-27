@@ -1,13 +1,13 @@
-#include"Game.h"
+#include"App.h"
 
 int main()
 {
-	Game game({ 960, 720 });
+	App app({ 960, 720 });
 
-	while (game.isActive())
+	while (app.isActive())
 	{
-		game.update();
-		game.render();
+		app.update();
+		app.render();
 	}
 
 	return 0;

@@ -144,18 +144,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\App.cpp" />
     <ClCompile Include="src\Brain.cpp" />
     <ClCompile Include="src\Dot.cpp" />
-    <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Obstacle.cpp" />
     <ClCompile Include="src\Population.cpp" />
     <ClCompile Include="src\Target.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="inc\App.h" />
     <ClInclude Include="inc\Brain.h" />
     <ClInclude Include="inc\Dot.h" />
-    <ClInclude Include="inc\Game.h" />
     <ClInclude Include="inc\Obstacle.h" />
     <ClInclude Include="inc\Population.h" />
     <ClInclude Include="inc\Target.h" />
