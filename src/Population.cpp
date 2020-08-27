@@ -97,7 +97,7 @@ int Population::improvedPoolSelection()
 	unsigned int index = 0;
 	float r = randNum(0, 1);
 
-	while (r > 0)
+	while (r > 0 && index < m_population.size())
 	{
 		r -= m_population[index].getProbability();
 		index++;
