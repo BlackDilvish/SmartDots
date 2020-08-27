@@ -39,7 +39,7 @@ void Game::initWindow(const std::pair<size_t, size_t>& windowSize)
 	sf::VideoMode videomode(windowSize.first, windowSize.second);
 
 	m_window = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(videomode, "Learning dots"));
-	m_window->setFramerateLimit(600);
+	//m_window->setFramerateLimit(600);
 }
 
 void Game::pollevents()

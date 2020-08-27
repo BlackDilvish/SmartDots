@@ -87,7 +87,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\C++SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++ SFML kurs\sfml28 - SmartDots\Dots-GeneticAlgorithm\inc;D:\C++SFML\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -116,7 +116,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>SFML_STATIC;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\C++SFML\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\C++ SFML kurs\sfml28 - SmartDots\Dots-GeneticAlgorithm\inc;D:\C++SFML\SFML-2.5.1\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,21 +144,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Brain.cpp" />
-    <ClCompile Include="Dot.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Obstacle.cpp" />
-    <ClCompile Include="Population.cpp" />
-    <ClCompile Include="Target.cpp" />
+    <ClCompile Include="src\Brain.cpp" />
+    <ClCompile Include="src\Dot.cpp" />
+    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Obstacle.cpp" />
+    <ClCompile Include="src\Population.cpp" />
+    <ClCompile Include="src\Target.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Brain.h" />
-    <ClInclude Include="Dot.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="Obstacle.h" />
-    <ClInclude Include="Population.h" />
-    <ClInclude Include="Target.h" />
+    <ClInclude Include="inc\Brain.h" />
+    <ClInclude Include="inc\Dot.h" />
+    <ClInclude Include="inc\Game.h" />
+    <ClInclude Include="inc\Obstacle.h" />
+    <ClInclude Include="inc\Population.h" />
+    <ClInclude Include="inc\Target.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

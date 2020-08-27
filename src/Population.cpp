@@ -45,7 +45,7 @@ void Population::makeSelection()
 	Dot& bestDot = m_population[0];
 	std::cout << bestDot.getFitness() << " " << bestDot.getStep() << std::endl;
 
-	if(bestDot.finished())
+	if (bestDot.finished())
 		m_bestStep = bestDot.getStep();
 
 
