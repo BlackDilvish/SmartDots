@@ -21,6 +21,7 @@ public:
 	void reset();
 	void inherit(const Dot& parent);
 
+	static sf::Vector2f& getStartingPos() { return Dot::startingPos; }
 	static Target& getTarget() { return Dot::target; }
 	size_t getStep() const { return m_brain.step; }
 	float getFitness() const { return m_fitness; }
@@ -48,7 +49,7 @@ private:
 
 	static const float size;
 	static const float speed;
-	static const sf::Vector2f startingPos;
+	static sf::Vector2f startingPos;
 	static Target target;
 };
 

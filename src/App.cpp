@@ -10,10 +10,28 @@ App::App(const std::pair<size_t, size_t>& windowSize)
 void App::update()
 {
 	pollevents();
-	handleClick();
+	updateClick();
 
-	if(!m_editing)
+	switch (m_currentState)
+	{
+	case States::SetupTarget:
+		setupTarget();
+		break;
+	case States::SetupDots:
+		setupDots();
+		break;
+	case States::Edit:
+		moveObstacle();
+		break;
+	case States::Run:
+		if(validClick())
+			placeObstacle();
+
 		m_testPopulation->update(m_window->getSize(), m_obstacles);
+		break;
+	default:
+		break;
+	}		
 }
 
 void App::render()
@@ -23,7 +41,9 @@ void App::render()
 	for (auto& obstacle : m_obstacles)
 		obstacle.render(*m_window);
 
-	m_testPopulation->render(*m_window);
+	if(m_currentState == States::Run)
+		m_testPopulation->render(*m_window);
+
 	Dot::getTarget().render(*m_window);
 
 	m_window->display();
@@ -50,30 +70,47 @@ void App::pollevents()
 			m_window->close();
 }
 
-void App::handleClick()
+void App::updateClick()
 {
 	float dt = m_clock.restart().asSeconds();
 
 	if (m_clickTimer < m_clickCooldown)
 		m_clickTimer += dt;
+}
 
-	if (validClick() && !m_editing)
+void App::setupTarget()
+{
+	sf::Vector2i mousePos = sf::Mouse::getPosition(*m_window);
+	Dot::getTarget().setPosition(sf::Vector2f(mousePos));
+
+	if (validClick())
 	{
-		placeObstacle();
+		m_currentState = States::SetupDots;
 		m_clickTimer = 0;
 	}
+}
 
-	if (m_editing)
-		moveObstacle();
+void App::setupDots()
+{
+	sf::Vector2i mousePos = sf::Mouse::getPosition(*m_window);
+
+	if (validClick())
+	{
+		Dot::getStartingPos() = sf::Vector2f(mousePos);
+		m_testPopulation = std::make_unique<Population>(POPULATION_SIZE);
+		m_currentState = States::Run;
+		m_clickTimer = 0;
+	}
 }
 
 void App::placeObstacle()
 {
-	auto firstPos = sf::Mouse::getPosition(*m_window);
+	sf::Vector2i firstPos = sf::Mouse::getPosition(*m_window);
 	Obstacle obstacle(sf::Vector2f(100.f, 20.f), sf::Vector2f(firstPos));
 
 	m_obstacles.push_back(obstacle);
-	m_editing = true;
+	m_currentState = States::Edit;
+	m_clickTimer = 0;
 }
 
 void App::moveObstacle()
@@ -83,7 +120,7 @@ void App::moveObstacle()
 
 	if (validClick())
 	{
-		m_editing = false;
+		m_currentState = States::Run;
 		m_clickTimer = 0;
 	}
 }

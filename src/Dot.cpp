@@ -95,10 +95,10 @@ bool Dot::reachesTarget() const
 	return m_shape.getGlobalBounds().intersects(Dot::target.getGlobalBounds());
 }
 
-Target Dot::target{ sf::Vector2f(480.f, 10.f) };
+Target Dot::target{};
+
+sf::Vector2f Dot::startingPos{};
 
 const float Dot::speed = 10.f;
 
 const float Dot::size = 5.f;
-
-const sf::Vector2f Dot::startingPos = sf::Vector2f(400, 700);
