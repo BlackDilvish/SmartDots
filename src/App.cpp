@@ -20,6 +20,13 @@ void App::update()
 	case States::SetupDots:
 		setupDots();
 		break;
+	case States::AddObstacles:
+		if (validClick())
+			placeObstacle();
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+			m_currentState = States::Run;
+		break;
 	case States::Edit:
 		moveObstacle();
 		break;
@@ -98,7 +105,7 @@ void App::setupDots()
 	{
 		Dot::getStartingPos() = sf::Vector2f(mousePos);
 		m_testPopulation = std::make_unique<Population>(POPULATION_SIZE);
-		m_currentState = States::Run;
+		m_currentState = States::AddObstacles;
 		m_clickTimer = 0;
 	}
 }
@@ -120,7 +127,7 @@ void App::moveObstacle()
 
 	if (validClick())
 	{
-		m_currentState = States::Run;
+		m_currentState = States::AddObstacles;
 		m_clickTimer = 0;
 	}
 }

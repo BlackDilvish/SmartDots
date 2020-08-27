@@ -33,6 +33,7 @@ private:
 	{
 		SetupTarget,
 		SetupDots,
+		AddObstacles,
 		Edit,
 		Run
 	} m_currentState = States::SetupTarget;

@@ -20,8 +20,9 @@ void Population::update(const sf::Vector2u& windowSize, const std::vector<Obstac
 			dot.kill();
 
 	size_t activeDots = std::count_if(m_population.begin(), m_population.end(), [](Dot& d) { return d.active(); });
+	size_t finishedDots = std::count_if(m_population.begin(), m_population.end(), [](Dot& d) { return d.finished(); });
 
-	if (activeDots == 0 )
+	if (activeDots == 0 || finishedDots > 0)
 		makeSelection();
 }
 
