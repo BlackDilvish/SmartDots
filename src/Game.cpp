@@ -39,7 +39,6 @@ void Game::initWindow(const std::pair<size_t, size_t>& windowSize)
 	sf::VideoMode videomode(windowSize.first, windowSize.second);
 
 	m_window = std::unique_ptr<sf::RenderWindow>(new sf::RenderWindow(videomode, "Learning dots"));
-	//m_window->setFramerateLimit(600);
 }
 
 void Game::pollevents()
@@ -91,5 +90,12 @@ void Game::moveObstacle()
 
 bool Game::validClick() const
 {
-	return sf::Mouse::isButtonPressed(sf::Mouse::Left) && (m_clickTimer >= m_clickCooldown);
+	auto mousePos = sf::Mouse::getPosition(*m_window);
+
+	bool inWindow = mousePos.x > 0 && mousePos.x < m_window->getSize().x
+		&& mousePos.y > 0 && mousePos.y < m_window->getSize().y;
+
+	bool validTime = m_clickTimer >= m_clickCooldown;
+
+	return sf::Mouse::isButtonPressed(sf::Mouse::Left) && inWindow && validTime;
 }

@@ -94,7 +94,7 @@ int Population::poolSelection()
 
 int Population::improvedPoolSelection()
 {
-	int index = 0;
+	unsigned int index = 0;
 	float r = randNum(0, 1);
 
 	while (r > 0)
@@ -103,5 +103,8 @@ int Population::improvedPoolSelection()
 		index++;
 	}
 
-	return --index;
+	if (index <= m_population.size())
+		return index == 0 ? 0 : --index;
+	else
+		throw("Index of the population is out of range");
 }
